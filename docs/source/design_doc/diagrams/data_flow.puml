@@ -1,0 +1,42 @@
+@startuml
+title Data Flow Diagram - Football Player Absence System
+
+!define RECTANGLE class
+skinparam rectangle {
+    BackgroundColor #EEF
+    BorderColor #333
+}
+skinparam arrow {
+    Color #333
+}
+
+actor "Player" as P
+rectangle "Client (Tablet App)" as Client {
+    rectangle "Camera Module" as Camera
+    rectangle "Face Capture & Preprocessing" as Preprocess
+}
+rectangle "Server" as Server {
+    rectangle "Face Recognition Service" as FaceRec
+    rectangle "Database" as DB
+    rectangle "Web Interface / API" as API
+    rectangle "Absence Sheet Generator" as Sheet
+}
+
+P --> Camera : Presents face
+Camera --> Preprocess : Capture image
+Preprocess --> API : Send processed image
+
+API --> FaceRec : Request recognition
+FaceRec --> DB : Fetch player embeddings
+DB --> FaceRec : Return possible matches
+FaceRec --> API : Send recognition result
+API --> Client : Return player info
+
+Client --> P : Display recognized info\nand confirmation prompt
+P --> Client : Confirm identity
+Client --> API : Send confirmation
+
+API --> Sheet : Add player record\n(training attendance)
+Sheet --> DB : Store attendance record
+
+@enduml

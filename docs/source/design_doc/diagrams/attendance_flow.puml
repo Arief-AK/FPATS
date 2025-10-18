@@ -1,0 +1,17 @@
+@startuml
+title Attendance Recognition Sequence
+
+actor Player
+participant Client
+participant Server
+database DB
+
+Player -> Client : Face camera
+Client -> Server : Send image
+Server -> DB : Match embedding
+DB --> Server : Match result
+Server --> Client : Player info
+Client -> Player : Display + Confirm
+Client -> Server : Log attendance
+Server -> DB : Save record
+@enduml

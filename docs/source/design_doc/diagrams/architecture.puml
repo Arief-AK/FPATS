@@ -1,0 +1,51 @@
+@startuml
+title System Architecture Diagram
+
+!define RECTANGLE class
+skinparam rectangle {
+    BackgroundColor #EEF
+    BorderColor #333
+}
+skinparam componentStyle rectangle
+skinparam arrow {
+    Color #333
+}
+
+actor "Player" as Player
+
+node "Tablet / Client Device" as Client {
+    [Camera]
+    [Face Capture Module]
+    [UI & Confirmation App]
+}
+
+node "Server" as Server {
+    [Web Server / REST API]
+    [Face Recognition Service]
+    [Absence Sheet Generator]
+}
+
+database "Database" as DB {
+    [Player Records]
+    [Face Embeddings]
+    [Attendance Logs]
+}
+
+cloud "Admin Web Portal" as Portal {
+    [Attendance Dashboard]
+    [Player Management UI]
+}
+
+Player --> Client : Faces camera\nand confirms identity
+Client --> Server : Uploads face image\n(API Request)
+Server --> [Face Recognition Service] : Process recognition
+[Face Recognition Service] --> DB : Retrieve & compare embeddings
+DB --> [Face Recognition Service] : Return match results
+[Face Recognition Service] --> Server : Recognition result
+Server --> Client : Return matched player info
+Client --> Server : Confirm attendance
+Server --> [Absence Sheet Generator] : Update record
+[Absence Sheet Generator] --> DB : Save attendance log
+Portal --> DB : View / manage attendance and player data
+
+@enduml

@@ -1,0 +1,45 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build docs",
+            "type": "shell",
+            "command": ". .venv/bin/activate.fish; and sphinx-autobuild docs/source/ docs/build/html",
+            "options": {
+                "shell": {
+                    "executable": "fish",
+                    "args": ["-c"]
+                }
+            },
+            "windows": {
+                "command": ".venv\\Scripts\\activate && sphinx-autobuild docs/source/ docs/build/html",
+                "options": {
+                    "shell": {
+                        "executable": "cmd.exe",
+                        "args": ["/c"]
+                    }
+                }
+            },
+            "linux": {
+                "command": "if command -v fish >/dev/null 2>&1; then fish -c '. .venv/bin/activate.fish; and sphinx-autobuild docs/source/ docs/build/html'; else source .venv/bin/activate && sphinx-autobuild docs/source/ docs/build/html; fi",
+                "options": {
+                    "shell": {
+                        "executable": "/bin/sh",
+                        "args": ["-c"]
+                    }
+                }
+            },
+            "osx": {
+                "command": "source .venv/bin/activate && sphinx-autobuild docs/source/ docs/build/html",
+                "options": {
+                    "shell": {
+                        "executable": "/bin/zsh",
+                        "args": ["-c"]
+                    }
+                }
+            }
+        }
+    ]
+}
