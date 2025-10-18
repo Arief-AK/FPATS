@@ -7,9 +7,12 @@ System to automate the attendance recording of football players after training s
 Documentation
 -------------
 
-The documentation of this project is setup using [Sphinx](https://www.sphinx-doc.org/en/master/index.html) and hosted on [Read the Docs](https://about.readthedocs.com/).
-To develop the documentation, ensure that dependencies are correctly setup. See the :doc:`docs/source/development/usage`
+The documentation of this project is setup using `sphinx`_ and hosted on `read the docs`_. To develop the documentation,
+ensure that dependencies are correctly setup. See the `usage`_ documentation for more details.
 
 Latest documentation is in `read the docs`_.
 
-.. _read the docs: https://fpats.readthedocs.io/en/latest/
+.. _read the docs: https://about.readthedocs.com/
+.. _sphinx: https://www.sphinx-doc.org/en/master/index.html
+.. _docs: https://fpats.readthedocs.io/en/latest/
+.. _usage: https://github.com/Arief-AK/FPATS/blob/main/docs/source/development/usage.rst
