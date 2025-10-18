@@ -41,6 +41,7 @@ and records their attendance into an Excel-like absence sheet.
 
 3. High-Level Architecture
 --------------------------
+
 .. plantuml:: ./diagrams/architecture.puml
 
 4. Module Breakdown
