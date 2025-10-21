@@ -1,0 +1,52 @@
+@startuml
+title Deployment Diagram - Football Player Absence Tracking System
+
+skinparam node {
+    BackgroundColor #EEF
+    BorderColor #333
+    FontColor black
+}
+
+skinparam artifact {
+    BackgroundColor #F9F9F9
+    BorderColor #444
+}
+
+actor "Player" as Player
+
+node "Client Device (Tablet / iPad)" as Client {
+    artifact "Camera Hardware" as Cam
+    artifact "Face Capture App" as App
+    artifact "UI (Confirm Attendance)" as UI
+}
+
+node "Local Network / Internet" as Network
+
+node "Application Server" as Server {
+    artifact "Web Server / REST API" as API
+    artifact "Face Recognition Service" as FaceRec
+    artifact "Absence Sheet Generator" as SheetGen
+}
+
+node "Database Server" as DB {
+    artifact "Player Profiles DB"
+    artifact "Face Embeddings DB"
+    artifact "Attendance Records DB"
+}
+
+node "Admin Workstation" as Admin {
+    artifact "Web Browser"
+    artifact "Attendance Dashboard"
+}
+
+Player --> Cam : Faces camera
+Cam --> App : Capture face image
+App --> API : Upload image via HTTPS
+API --> FaceRec : Forward image for recognition
+FaceRec --> DB : Retrieve embeddings and profiles
+API --> SheetGen : Log attendance entry
+SheetGen --> DB : Store attendance data
+Admin --> API : View / manage records via web interface
+Admin --> DB : (Read access for reports)
+
+@enduml

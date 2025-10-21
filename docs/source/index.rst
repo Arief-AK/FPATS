@@ -11,11 +11,12 @@ Automate attendance recording of football players after training sessions using 
 **System Type:**  
 Client–Server architecture with a tablet interface, recognition backend, and database storage.
 
-See the :doc:`development/usage`
+See the :doc:`usage/usage`
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
 
-   design_doc/design_document
-   development/usage
+   design_doc/system_design
+   development/development
+   usage/usage

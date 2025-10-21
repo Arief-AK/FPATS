@@ -1,0 +1,36 @@
+@startuml
+
+title Sequence Diagram - Player Attendance Registration via Face Recognition
+
+actor Player
+participant "Camera / Client App" as Client
+participant "Server API" as Server
+participant "Face Recognition Service" as FaceRec
+database "Database" as DB
+participant "Absence Sheet Generator" as Sheet
+
+== Face Capture and Upload ==
+Player -> Client : Faces camera
+Client -> Client : Capture and preprocess face image
+Client -> Server : Send face image (HTTP POST)
+
+== Face Recognition ==
+Server -> FaceRec : Forward image for recognition
+FaceRec -> DB : Query known face embeddings
+DB --> FaceRec : Return embeddings and metadata
+FaceRec -> Server : Return recognition result (player ID / name)
+
+== Confirmation ==
+Server -> Client : Send recognised player info
+Client -> Player : Display name and photo for confirmation
+Player -> Client : Confirm identity (press "Confirm")
+Client -> Server : Send confirmation
+
+== Attendance Logging ==
+Server -> Sheet : Update absence/attendance record
+Sheet -> DB : Insert attendance entry
+DB --> Sheet : Acknowledge record saved
+Sheet --> Server : Confirmation of successful update
+Server -> Client : Send success response ("Attendance recorded")
+
+@enduml
