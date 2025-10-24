@@ -1,0 +1,5 @@
+@startuml
+
+title Sequence Diagram - Player Attendance Registration via Face Recognition
+
+@enduml
