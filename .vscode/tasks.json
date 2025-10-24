@@ -23,7 +23,7 @@
                 }
             },
             "linux": {
-                "command": "if command -v fish >/dev/null 2>&1; then fish -c '. .venv/bin/activate.fish; and sphinx-autobuild docs/source/ docs/build/html'; else source .venv/bin/activate && sphinx-autobuild docs/source/ docs/build/html; fi",
+                "command": "if command -v fish >/dev/null 2>&1; then fish -c '. .venv/bin/activate.fish; and sphinx-autobuild docs/source/ docs/build/html'; else . .venv/bin/activate && sphinx-autobuild docs/source/ docs/build/html; fi",
                 "options": {
                     "shell": {
                         "executable": "/bin/sh",
