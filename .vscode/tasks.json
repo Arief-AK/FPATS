@@ -14,31 +14,53 @@
                 }
             },
             "windows": {
-                "command": ".venv\\Scripts\\activate && sphinx-autobuild docs/source/ docs/build/html",
-                "options": {
-                    "shell": {
-                        "executable": "cmd.exe",
-                        "args": ["/c"]
-                    }
-                }
+                "command": ".venv\\Scripts\\activate && sphinx-autobuild docs/source/ docs/build/html"
             },
             "linux": {
-                "command": "if command -v fish >/dev/null 2>&1; then fish -c '. .venv/bin/activate.fish; and sphinx-autobuild docs/source/ docs/build/html'; else . .venv/bin/activate && sphinx-autobuild docs/source/ docs/build/html; fi",
+                "command": ". .venv/bin/activate.fish; and sphinx-autobuild docs/source/ docs/build/html",
                 "options": {
                     "shell": {
-                        "executable": "/bin/sh",
+                        "executable": "fish",
                         "args": ["-c"]
                     }
                 }
             },
             "osx": {
-                "command": "source .venv/bin/activate && sphinx-autobuild docs/source/ docs/build/html",
+                "command": "source .venv/bin/activate && sphinx-autobuild docs/source/ docs/build/html"
+            },
+            "group": "build"
+        },
+        {
+            "label": "Perform unit-test",
+            "type": "shell",
+            "command": ". .venv/bin/activate.fish; and python -m pytest tests/unit/ -v",
+            "options": {
+                "shell": {
+                    "executable": "fish",
+                    "args": ["-c"]
+                }
+            },
+            "windows": {
+                "command": ".venv\\Scripts\\activate && python -m pytest tests/unit/ -v"
+            },
+            "linux": {
+                "command": ". .venv/bin/activate.fish; and python -m pytest tests/unit/ -v",
                 "options": {
                     "shell": {
-                        "executable": "/bin/zsh",
+                        "executable": "fish",
                         "args": ["-c"]
                     }
                 }
+            },
+            "osx": {
+                "command": "source .venv/bin/activate && python -m pytest tests/unit/ -v"
+            },
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
             }
         }
     ]
